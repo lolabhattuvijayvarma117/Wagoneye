@@ -23,11 +23,16 @@ export default function App() {
           <Route path="/" element={<Layout />}>
             <Route index element={<Navigate to="/dashboard" replace />} />
             <Route path="dashboard" element={<Dashboard />} />
+            <Route path="wagons" element={<Navigate to="/wagons/WGN-8492" replace />} />
             <Route path="wagons/:id" element={<WagonDetail />} />
+            <Route path="rakes" element={<Navigate to="/dashboard" replace />} />
+            <Route path="cameras" element={<Navigate to="/dashboard" replace />} />
             <Route path="reports" element={<Reports />} />
             <Route path="ask-ai" element={<AskAI />} />
             <Route path="settings" element={<Settings />} />
           </Route>
+          {/* Catch-all */}
+          <Route path="*" element={<Navigate to="/dashboard" replace />} />
         </Routes>
       </BrowserRouter>
     </ToastProvider>
