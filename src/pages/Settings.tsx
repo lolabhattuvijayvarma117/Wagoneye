@@ -74,9 +74,9 @@ export default function Settings() {
 
   // Notifications state
   const [mismatchAlertPercent, setMismatchAlertPercent] = useState(2.0)
-  const [alertOnLowConfidence, setAlertOnLowConfidence] = useState(true)
-  const [alertOnCameraDisconnect, setAlertOnCameraDisconnect] = useState(true)
-  const [webhookUrl, setWebhookUrl] = useState('https://yard-api.internal.port/telemetry/webhooks/alerts')
+  const [alertOnLowConfidence] = useState(true)
+  const [alertOnCameraDisconnect] = useState(true)
+  const [webhookUrl] = useState('https://yard-api.internal.port/telemetry/webhooks/alerts')
 
   const handleSaveCameraConfig = (camId: string) => {
     showToast({
@@ -411,102 +411,84 @@ export default function Settings() {
           </Panel>
         </TabsContent>
 
-        {/* ── 3. Notification Routing Tab ─────────────────── */}
+        {/* ── 3. Notifications Tab ────────────────────────────── */}
         <TabsContent value="notifications" className="mt-0">
           <Panel className="rounded-t-none border-t-0">
             <PanelHeader
-              title="Operator Alerts & Signal Policies"
+              title="Alert Routing & Policies"
               icon={<Bell size={16} />}
               actions={
-                <Button
-                  variant="primary"
-                  size="sm"
-                  onClick={handleSaveNotifications}
-                  className="gap-1.5 font-mono text-xs"
-                >
-                  <Save size={13} /> Save Policies
-                </Button>
+                <span className="text-[11px] font-mono text-[var(--color-n-400)]">
+                  {mismatchAlertPercent}% MISMATCH ALERTS
+                </span>
               }
             />
-            <PanelBody className="p-5 space-y-5">
-              <div className="space-y-4">
-                <div className="p-4 rounded-md bg-[var(--color-n-100)] border border-[var(--color-n-200)] flex items-center justify-between gap-4">
-                  <div>
-                    <div className="text-xs font-mono font-semibold text-[var(--color-n-800)]">
-                      MANIFEST COUNT MISMATCH ALERTS
-                    </div>
-                    <p className="text-[11px] text-[var(--color-n-400)] mt-0.5">
-                      Trigger visual warning pill when wagon counted delta exceeds percentage of planned manifest
-                    </p>
-                  </div>
-                  <div className="flex items-center gap-2 font-mono text-xs">
-                    <span className="text-[var(--color-n-400)]">Threshold:</span>
-                    <select
-                      value={mismatchAlertPercent}
-                      onChange={e => setMismatchAlertPercent(parseFloat(e.target.value))}
-                      className="h-8 px-2 rounded bg-[var(--color-n-150)] text-[var(--color-n-700)] border border-[var(--color-n-200)]"
-                    >
-                      <option value="1.0">± 1.0% (Strict)</option>
-                      <option value="2.0">± 2.0% (Standard)</option>
-                      <option value="5.0">± 5.0% (Tolerant)</option>
-                    </select>
-                  </div>
+            <PanelBody className="p-5 space-y-6">
+              <div className="p-4 rounded-md bg-[var(--color-n-100)] border border-[var(--color-n-200)] space-y-3">
+                <div className="flex items-center justify-between font-mono">
+                  <span className="text-xs font-semibold text-[var(--color-n-700)]">
+                    Mismatch Alert Threshold
+                  </span>
+                  <span className="text-sm font-bold text-[var(--color-accent)]">
+                    {mismatchAlertPercent}%
+                  </span>
                 </div>
-
-                <div className="p-4 rounded-md bg-[var(--color-n-100)] border border-[var(--color-n-200)] flex items-center justify-between gap-4">
-                  <div>
-                    <div className="text-xs font-mono font-semibold text-[var(--color-n-800)]">
-                      LOW CONFIDENCE NOTIFICATION (&lt; 0.60)
-                    </div>
-                    <p className="text-[11px] text-[var(--color-n-400)] mt-0.5">
-                      Highlight low-confidence detections in real-time attention panel for quick manual verification
-                    </p>
-                  </div>
-                  <label className="relative inline-flex items-center cursor-pointer">
-                    <input
-                      type="checkbox"
-                      checked={alertOnLowConfidence}
-                      onChange={e => setAlertOnLowConfidence(e.target.checked)}
-                      className="sr-only peer"
-                    />
-                    <div className="w-11 h-6 bg-[var(--color-n-200)] peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[var(--color-accent)]" />
-                  </label>
-                </div>
-
-                <div className="p-4 rounded-md bg-[var(--color-n-100)] border border-[var(--color-n-200)] flex items-center justify-between gap-4">
-                  <div>
-                    <div className="text-xs font-mono font-semibold text-[var(--color-n-800)]">
-                      CAMERA RTSP DISCONNECT / FRAME DROP SIGNAL
-                    </div>
-                    <p className="text-[11px] text-[var(--color-n-400)] mt-0.5">
-                      Sound audible tone and display critical alert banner immediately upon RTSP pipeline failure
-                    </p>
-                  </div>
-                  <label className="relative inline-flex items-center cursor-pointer">
-                    <input
-                      type="checkbox"
-                      checked={alertOnCameraDisconnect}
-                      onChange={e => setAlertOnCameraDisconnect(e.target.checked)}
-                      className="sr-only peer"
-                    />
-                    <div className="w-11 h-6 bg-[var(--color-n-200)] peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[var(--color-accent)]" />
-                  </label>
-                </div>
-
-                {/* Webhook endpoint */}
-                <div className="p-4 rounded-md bg-[var(--color-n-100)] border border-[var(--color-n-200)] space-y-2">
-                  <label className="block text-xs font-mono font-semibold text-[var(--color-n-800)]">
-                    DISPATCH WEBHOOK ENDPOINT
-                  </label>
-                  <p className="text-[11px] text-[var(--color-n-400)]">
-                    Sends JSON telemetry payloads for critical audit violations to port logistics operations bus
-                  </p>
+                <div className="flex items-center gap-2">
                   <input
-                    type="text"
-                    value={webhookUrl}
-                    onChange={e => setWebhookUrl(e.target.value)}
-                    className="w-full h-8 px-2.5 rounded bg-[var(--color-n-150)] text-[var(--color-n-700)] border border-[var(--color-n-200)] focus:border-[var(--color-accent)] focus:outline-none font-mono text-xs"
+                    type="range"
+                    min="0.5"
+                    max="10"
+                    step="0.5"
+                    value={mismatchAlertPercent}
+                    onChange={e => setMismatchAlertPercent(parseFloat(e.target.value))}
+                    className="w-full accent-[var(--color-accent)]"
                   />
+                  <p className="text-[11px] text-[var(--color-n-400)] font-sans">
+                    Percentage of count discrepancies that trigger operator alerts.
+                  </p>
+                </div>
+              </div>
+
+              <div className="p-4 rounded-md bg-[var(--color-n-100)] border border-[var(--color-n-200)] space-y-3">
+                <div className="flex items-center justify-between font-mono">
+                  <span className="text-xs font-semibold text-[var(--color-n-700)]">
+                    Alert On Low Confidence
+                  </span>
+                  <span className="text-sm text-[var(--color-n-500)]">
+                    {alertOnLowConfidence ? 'Enabled' : 'Disabled'}
+                  </span>
+                </div>
+                <div className="flex items-center justify-between font-mono">
+                  <span className="text-xs font-semibold text-[var(--color-n-700)]">
+                    Alert On Camera Disconnect
+                  </span>
+                  <span className="text-sm text-[var(--color-n-500)]">
+                    {alertOnCameraDisconnect ? 'Enabled' : 'Disabled'}
+                  </span>
+                </div>
+              </div>
+
+              <div className="p-4 rounded-md bg-[var(--color-n-100)] border border-[var(--color-n-200)] space-y-3">
+                <div className="flex items-center justify-between font-mono">
+                  <span className="text-xs font-semibold text-[var(--color-n-700)]">
+                    Webhook URL
+                  </span>
+                  <span className="text-sm text-[var(--color-n-500)]">
+                    {webhookUrl}
+                  </span>
+                </div>
+                <div className="flex items-center justify-between font-mono">
+                  <span className="text-xs font-semibold text-[var(--color-n-700)]">
+                    Save Changes
+                  </span>
+                  <Button
+                    variant="primary"
+                    size="sm"
+                    onClick={handleSaveNotifications}
+                    className="text-[10px] h-6 px-2"
+                  >
+                    Acknowledge
+                  </Button>
                 </div>
               </div>
             </PanelBody>

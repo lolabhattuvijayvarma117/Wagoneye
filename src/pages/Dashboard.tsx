@@ -241,6 +241,7 @@ export default function Dashboard() {
         accessorKey: 'plannedCount',
         header: 'Planned',
         size: 90,
+        meta: { numeric: true },
         cell: info => (
           <span className="text-[var(--color-n-500)]">{Number(info.getValue()).toLocaleString()}</span>
         ),
@@ -249,6 +250,7 @@ export default function Dashboard() {
         accessorKey: 'countedBags',
         header: 'Counted',
         size: 90,
+        meta: { numeric: true },
         cell: info => (
           <span className="text-[var(--color-n-800)] font-medium">
             {Number(info.getValue()).toLocaleString()}
@@ -259,6 +261,7 @@ export default function Dashboard() {
         accessorKey: 'delta',
         header: 'Delta',
         size: 90,
+        meta: { numeric: true },
         cell: info => {
           const delta = Number(info.getValue())
           const isZero = delta === 0
@@ -269,8 +272,8 @@ export default function Dashboard() {
                 color: isZero
                   ? 'var(--color-status-ok)'
                   : isPositive
-                  ? 'var(--color-status-warn)'
-                  : 'var(--color-status-alert)',
+                    ? 'var(--color-status-warn)'
+                    : 'var(--color-status-alert)',
               }}
             >
               {delta > 0 ? `+${delta}` : delta}
@@ -316,21 +319,19 @@ export default function Dashboard() {
                 <div className="flex bg-[var(--color-n-100)] p-0.5 rounded border border-[var(--color-n-200)] text-xs">
                   <button
                     onClick={() => setActiveCam('CAM-01')}
-                    className={`px-2 py-0.5 rounded font-mono text-[11px] transition-colors ${
-                      activeCam === 'CAM-01'
-                        ? 'bg-[var(--color-n-200)] text-[var(--color-accent)] font-medium'
-                        : 'text-[var(--color-n-400)] hover:text-[var(--color-n-600)]'
-                    }`}
+                    className={`px-2 py-0.5 rounded font-mono text-[11px] transition-colors ${activeCam === 'CAM-01'
+                      ? 'bg-[var(--color-n-200)] text-[var(--color-accent)] font-medium'
+                      : 'text-[var(--color-n-400)] hover:text-[var(--color-n-600)]'
+                      }`}
                   >
                     CAM-01
                   </button>
                   <button
                     onClick={() => setActiveCam('CAM-02')}
-                    className={`px-2 py-0.5 rounded font-mono text-[11px] transition-colors ${
-                      activeCam === 'CAM-02'
-                        ? 'bg-[var(--color-n-200)] text-[var(--color-accent)] font-medium'
-                        : 'text-[var(--color-n-400)] hover:text-[var(--color-n-600)]'
-                    }`}
+                    className={`px-2 py-0.5 rounded font-mono text-[11px] transition-colors ${activeCam === 'CAM-02'
+                      ? 'bg-[var(--color-n-200)] text-[var(--color-accent)] font-medium'
+                      : 'text-[var(--color-n-400)] hover:text-[var(--color-n-600)]'
+                      }`}
                   >
                     CAM-02
                   </button>
@@ -379,21 +380,21 @@ export default function Dashboard() {
 
               {/* Simulated Detection Track Bounding Boxes */}
               <div className="absolute left-1/3 top-1/3 w-28 h-20 border border-[var(--color-accent)] bg-[var(--color-accent)]/10 rounded-sm flex flex-col justify-between p-1 pointer-events-none animate-pulse">
-                <div className="flex items-center justify-between text-[9px] font-mono text-[var(--color-accent)]">
+                <div className="flex items-center justify-between text-[9px] font-mono text-[var(--color-accent)] leading-none">
                   <span>BAG #1042</span>
-                  <span>0.98</span>
+                  <span className="tabular-nums">0.98</span>
                 </div>
-                <div className="text-[8px] font-mono text-[var(--color-status-ok)]">
+                <div className="text-[8px] font-mono text-[var(--color-status-ok)] leading-none">
                   FLOW: LOAD →
                 </div>
               </div>
 
-              <div className="absolute right-1/4 top-2/5 w-24 h-16 border border-[var(--color-status-ok)] bg-[var(--color-status-ok)]/10 rounded-sm flex flex-col justify-between p-1 pointer-events-none">
-                <div className="flex items-center justify-between text-[9px] font-mono text-[var(--color-status-ok)]">
+              <div className="absolute right-1/4 top-2/5 w-28 h-20 border border-[var(--color-status-ok)] bg-[var(--color-status-ok)]/10 rounded-sm flex flex-col justify-between p-1 pointer-events-none">
+                <div className="flex items-center justify-between text-[9px] font-mono text-[var(--color-status-ok)] leading-none">
                   <span>BAG #1043</span>
-                  <span>0.96</span>
+                  <span className="tabular-nums">0.96</span>
                 </div>
-                <div className="text-[8px] font-mono text-[var(--color-status-ok)]">
+                <div className="text-[8px] font-mono text-[var(--color-status-ok)] leading-none">
                   VERIFIED
                 </div>
               </div>
@@ -409,30 +410,28 @@ export default function Dashboard() {
             <div className="mt-3 grid grid-cols-2 gap-3">
               <div
                 onClick={() => setActiveCam('CAM-01')}
-                className={`p-2 rounded border cursor-pointer transition-all flex items-center justify-between ${
-                  activeCam === 'CAM-01'
-                    ? 'border-[var(--color-accent)] bg-[var(--color-n-100)]'
-                    : 'border-[var(--color-n-200)] bg-[var(--color-n-50)] hover:bg-[var(--color-n-100)]'
-                }`}
+                className={`p-2 rounded border cursor-pointer transition-all flex items-center justify-between ${activeCam === 'CAM-01'
+                  ? 'border-[var(--color-accent)] bg-[var(--color-n-100)]'
+                  : 'border-[var(--color-n-200)] bg-[var(--color-n-50)] hover:bg-[var(--color-n-100)]'
+                  }`}
               >
                 <div className="flex items-center gap-2">
                   <Radio size={14} className="text-[var(--color-status-live)] animate-pulse" />
-                  <span className="text-xs font-mono font-medium text-[var(--color-n-700)]">CAM-01: Yard Door A</span>
+                  <span className="text-xs font-mono font-medium text-[var(--color-n-700)] leading-none">CAM-01: Yard Door A</span>
                 </div>
                 <StatusPill status="live" label="ACTIVE" />
               </div>
 
               <div
                 onClick={() => setActiveCam('CAM-02')}
-                className={`p-2 rounded border cursor-pointer transition-all flex items-center justify-between ${
-                  activeCam === 'CAM-02'
-                    ? 'border-[var(--color-accent)] bg-[var(--color-n-100)]'
-                    : 'border-[var(--color-n-200)] bg-[var(--color-n-50)] hover:bg-[var(--color-n-100)]'
-                }`}
+                className={`p-2 rounded border cursor-pointer transition-all flex items-center justify-between ${activeCam === 'CAM-02'
+                  ? 'border-[var(--color-accent)] bg-[var(--color-n-100)]'
+                  : 'border-[var(--color-n-200)] bg-[var(--color-n-50)] hover:bg-[var(--color-n-100)]'
+                  }`}
               >
                 <div className="flex items-center gap-2">
                   <Radio size={14} className="text-[var(--color-status-ok)]" />
-                  <span className="text-xs font-mono font-medium text-[var(--color-n-700)]">CAM-02: Yard Door B</span>
+                  <span className="text-xs font-mono font-medium text-[var(--color-n-700)] leading-none">CAM-02: Yard Door B</span>
                 </div>
                 <StatusPill status="ok" label="STANDBY" />
               </div>
@@ -486,18 +485,18 @@ export default function Dashboard() {
           }
         />
         <PanelBody className="p-4">
-          <div className="flex items-center gap-2 overflow-x-auto pb-1">
+          <div className="flex items-center gap-3 overflow-x-auto pb-1 px-1 -mx-1">
             {mockWagons.map((wagon, idx) => {
               const bg =
                 wagon.status === 'ok'
                   ? 'var(--color-status-ok)'
                   : wagon.status === 'live'
-                  ? 'var(--color-status-live)'
-                  : wagon.status === 'warn'
-                  ? 'var(--color-status-warn)'
-                  : wagon.status === 'alert'
-                  ? 'var(--color-status-alert)'
-                  : 'var(--color-n-300)'
+                    ? 'var(--color-status-live)'
+                    : wagon.status === 'warn'
+                      ? 'var(--color-status-warn)'
+                      : wagon.status === 'alert'
+                        ? 'var(--color-status-alert)'
+                        : 'var(--color-n-300)'
 
               return (
                 <Tooltip
@@ -513,10 +512,10 @@ export default function Dashboard() {
                 >
                   <button
                     onClick={() => navigate(`/wagons/${wagon.id}`)}
-                    className="flex-1 min-w-[70px] h-14 rounded-md border border-[var(--color-n-200)] bg-[var(--color-n-100)] hover:border-[var(--color-accent)] transition-all p-1.5 flex flex-col justify-between text-left group"
+                    className="flex-shrink-0 w-[72px] h-14 rounded-md border border-[var(--color-n-200)] bg-[var(--color-n-100)] hover:border-[var(--color-accent)] transition-all p-1.5 flex flex-col justify-between text-left group"
                   >
                     <div className="flex items-center justify-between">
-                      <span className="text-[10px] font-mono font-semibold text-[var(--color-n-700)] group-hover:text-[var(--color-accent)]">
+                      <span className="text-[10px] font-mono font-semibold text-[var(--color-n-700)] group-hover:text-[var(--color-accent)] leading-none">
                         #{idx + 1}
                       </span>
                       <span
@@ -525,7 +524,7 @@ export default function Dashboard() {
                       />
                     </div>
                     <div>
-                      <div className="text-[10px] font-mono text-[var(--color-n-400)] truncate">
+                      <div className="text-[10px] font-mono text-[var(--color-n-400)] truncate leading-none">
                         {wagon.id}
                       </div>
                       <div className="text-[11px] font-mono font-medium text-[var(--color-n-800)] leading-none mt-0.5">
@@ -656,22 +655,20 @@ export default function Dashboard() {
 
                   <div className="flex items-center gap-2">
                     <span
-                      className={`text-[9px] px-1.5 py-0.5 rounded font-mono font-medium ${
-                        ev.direction === 'LOAD'
-                          ? 'bg-[#38bdf8]/15 text-[#38bdf8]'
-                          : 'bg-[#fb923c]/15 text-[#fb923c]'
-                      }`}
+                      className={`text-[9px] px-1.5 py-0.5 rounded font-mono font-medium ${ev.direction === 'LOAD'
+                        ? 'bg-[#38bdf8]/15 text-[#38bdf8]'
+                        : 'bg-[#fb923c]/15 text-[#fb923c]'
+                        }`}
                     >
                       {ev.direction}
                     </span>
                     <span
-                      className={`text-[10px] font-mono ${
-                        ev.confidence > 0.95
-                          ? 'text-[var(--color-status-ok)]'
-                          : ev.confidence > 0.8
+                      className={`text-[10px] font-mono ${ev.confidence > 0.95
+                        ? 'text-[var(--color-status-ok)]'
+                        : ev.confidence > 0.8
                           ? 'text-[var(--color-status-warn)]'
                           : 'text-[var(--color-status-alert)]'
-                      }`}
+                        }`}
                     >
                       {(ev.confidence * 100).toFixed(1)}%
                     </span>

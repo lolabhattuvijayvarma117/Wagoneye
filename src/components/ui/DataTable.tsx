@@ -68,17 +68,21 @@ export function DataTable<TData>({
               {hg.headers.map(header => {
                 const canSort = header.column.getCanSort()
                 const sorted = header.column.getIsSorted()
+                // Determine text alignment: numeric columns right-aligned, text left
+                const isNumeric = header.column.columnDef.meta as { numeric?: boolean } | undefined
+                const align = isNumeric?.numeric ? 'right' : 'left'
                 return (
                   <th
                     key={header.id}
                     style={{ width: header.getSize() }}
                     className={cn(
-                      'px-3 py-2 text-left text-[11px] font-medium text-[var(--color-n-400)] uppercase tracking-wider',
+                      `px-3 py-2 text-[11px] font-medium text-[var(--color-n-400)] uppercase tracking-wider`,
+                      align === 'right' ? 'text-right' : 'text-left',
                       canSort && 'cursor-pointer select-none hover:text-[var(--color-n-600)]'
                     )}
                     onClick={header.column.getToggleSortingHandler()}
                   >
-                    <span className="inline-flex items-center gap-1">
+                    <span className={cn('inline-flex items-center gap-1', align === 'right' && 'justify-end')}>
                       {flexRender(header.column.columnDef.header, header.getContext())}
                       {canSort && (
                         <span className="text-[var(--color-n-300)]">
@@ -106,15 +110,22 @@ export function DataTable<TData>({
                 )}
                 onClick={() => onRowClick?.(row.original)}
               >
-                {row.getVisibleCells().map(cell => (
-                  <td
-                    key={cell.id}
-                    className="px-3 py-2 text-[var(--color-n-600)] truncate"
-                    style={{ height: rowHeight }}
-                  >
-                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                  </td>
-                ))}
+                {row.getVisibleCells().map(cell => {
+                  const isNumeric = cell.column.columnDef.meta as { numeric?: boolean } | undefined
+                  const align = isNumeric?.numeric ? 'right' : 'left'
+                  return (
+                    <td
+                      key={cell.id}
+                      className={cn(
+                        'px-3 py-2 text-[var(--color-n-600)] truncate',
+                        align === 'right' ? 'text-right' : 'text-left'
+                      )}
+                      style={{ height: rowHeight }}
+                    >
+                      {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                    </td>
+                  )
+                })}
               </tr>
             )
           })}

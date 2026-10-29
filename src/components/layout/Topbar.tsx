@@ -17,11 +17,7 @@ const YARDS = [
   { id: 'yard-01', name: 'Yard 01 — Central Siding', code: 'Y-01' },
 ]
 
-export default function Topbar({
-  onMenuToggle,
-  onAlertsClick,
-  unreadAlertCount = 3,
-}: TopbarProps) {
+export default function Topbar({ onMenuToggle, onAlertsClick, unreadAlertCount = 3 }: TopbarProps) {
   const [selectedYard, setSelectedYard] = useState(YARDS[0])
   const [searchQuery, setSearchQuery] = useState('')
   const [time, setTime] = useState({ local: '', utc: '' })
@@ -46,12 +42,7 @@ export default function Topbar({
       {/* Left: Brand + Yard Selector */}
       <div className="flex items-center gap-4">
         {onMenuToggle && (
-          <IconButton
-            label="Toggle menu"
-            size="sm"
-            onClick={onMenuToggle}
-            className="md:hidden"
-          >
+          <IconButton label="Toggle menu" size="sm" onClick={onMenuToggle} className="md:hidden">
             <Menu size={16} />
           </IconButton>
         )}
@@ -62,7 +53,7 @@ export default function Topbar({
             <TrainFront size={16} />
           </span>
           <span
-            className="text-xs font-semibold tracking-wider text-[var(--color-n-800)] uppercase"
+            className="text-xs font-semibold tracking-wider text-[var(--color-n-800)] uppercase leading-none"
             style={{ fontFamily: 'var(--font-mono)' }}
           >
             WAGONEYE
@@ -97,9 +88,7 @@ export default function Topbar({
                   className="px-2.5 py-1.5 rounded cursor-pointer hover:bg-[var(--color-n-200)] hover:text-[var(--color-n-800)] flex items-center justify-between outline-none"
                 >
                   <span>{yard.name}</span>
-                  <span
-                    className="text-[10px] text-[var(--color-n-400)] font-mono"
-                  >
+                  <span className="text-[10px] text-[var(--color-n-400)] font-mono leading-none">
                     {yard.code}
                   </span>
                 </DropdownMenu.Item>
@@ -129,16 +118,16 @@ export default function Topbar({
 
       {/* Right: Telemetry Clock, System Status, Alerts */}
       <div className="flex items-center gap-3">
-        {/* Dynamic Clocks */}
+        {/* Dynamic Clocks — fixed width to prevent jumping */}
         <div
-          className="hidden sm:flex items-center gap-2 text-[11px] text-[var(--color-n-500)] bg-[var(--color-n-150)] px-2 py-0.5 rounded border border-[var(--color-n-200)] tabular-nums"
+          className="hidden sm:flex items-center gap-2 text-[11px] text-[var(--color-n-500)] bg-[var(--color-n-150)] px-2 py-0.5 rounded border border-[var(--color-n-200)] tabular-nums shrink-0"
           style={{ fontFamily: 'var(--font-mono)' }}
         >
-          <span className="text-[var(--color-n-700)]">{time.local || '--:--:--'}</span>
-          <span className="text-[9px] text-[var(--color-n-400)]">LOC</span>
-          <span className="text-[var(--color-n-300)]">|</span>
-          <span className="text-[var(--color-n-600)]">{time.utc || '--:--:--'}</span>
-          <span className="text-[9px] text-[var(--color-n-400)]">UTC</span>
+          <span className="text-[var(--color-n-700)] leading-none">{time.local || '--:--:--'}</span>
+          <span className="text-[9px] text-[var(--color-n-400)] leading-none">LOC</span>
+          <span className="text-[var(--color-n-300)] leading-none">|</span>
+          <span className="text-[var(--color-n-600)] leading-none">{time.utc || '--:--:--'}</span>
+          <span className="text-[9px] text-[var(--color-n-400)] leading-none">UTC</span>
         </div>
 
         {/* Live Status Pill */}
@@ -157,7 +146,7 @@ export default function Topbar({
             </IconButton>
             {unreadAlertCount > 0 && (
               <span
-                className="absolute -top-0.5 -right-0.5 min-w-[14px] h-[14px] px-1 rounded-full text-[9px] font-bold flex items-center justify-center text-black"
+                className="absolute -top-0.5 -right-0.5 min-w-[14px] h-[14px] px-1 rounded-full text-[9px] font-bold flex items-center justify-center text-black leading-none"
                 style={{
                   background: 'var(--color-status-warn)',
                   fontFamily: 'var(--font-mono)',
