@@ -154,6 +154,9 @@ export default function Dashboard() {
   const chartOptions = useMemo(() => {
     return {
       title: '',
+      legend: {
+        show: false,
+      },
       scales: {
         x: { time: true },
         y: { auto: true },
@@ -445,21 +448,35 @@ export default function Dashboard() {
             title="Hourly Throughput (Loaded vs Unloaded)"
             icon={<TrendingUp size={16} />}
             actions={
-              <div className="flex items-center gap-2 text-[10px] font-mono text-[var(--color-n-400)]">
-                <span className="flex items-center gap-1">
-                  <span className="w-2.5 h-0.5 bg-[#38bdf8]" /> Loaded
+              <div className="flex items-center gap-3 text-[11px] font-mono text-[var(--color-n-400)]">
+                <span className="flex items-center gap-1.5">
+                  <span className="w-2.5 h-1 rounded-full bg-[#38bdf8]" />
+                  <span className="text-[var(--color-n-600)]">Loaded</span>
                 </span>
-                <span className="flex items-center gap-1">
-                  <span className="w-2.5 h-0.5 bg-[#fb923c]" /> Unloaded
+                <span className="flex items-center gap-1.5">
+                  <span className="w-2.5 h-1 rounded-full bg-[#fb923c]" />
+                  <span className="text-[var(--color-n-600)]">Unloaded</span>
+                </span>
+                <span className="flex items-center gap-1.5">
+                  <span className="w-3 h-0.5 border-t border-dashed border-[#5A6B8A]" />
+                  <span className="text-[var(--color-n-400)]">Target (1,200)</span>
                 </span>
               </div>
             }
           />
-          <PanelBody className="p-4 flex-1 flex flex-col justify-center">
-            <UPlotChart options={chartOptions} data={chartData} height={280} />
-            <div className="mt-3 pt-2 border-t border-[var(--color-n-200)] flex items-center justify-between text-xs text-[var(--color-n-500)] font-mono">
-              <span>Manifest Target: 1,200 bags/hr</span>
-              <span className="text-[var(--color-status-ok)]">Peak: 1,600 bags/hr (11:00)</span>
+          <PanelBody className="p-4 flex-1 flex flex-col justify-between">
+            <div className="w-full">
+              <UPlotChart options={chartOptions} data={chartData} height={260} />
+            </div>
+            <div className="mt-3 pt-2.5 border-t border-[var(--color-n-200)] flex items-center justify-between text-xs text-[var(--color-n-500)] font-mono">
+              <span className="flex items-center gap-1.5">
+                <span className="text-[var(--color-n-400)]">Manifest Target:</span>
+                <strong className="text-[var(--color-n-700)] font-semibold">1,200 bags/hr</strong>
+              </span>
+              <span className="flex items-center gap-1.5">
+                <span className="text-[var(--color-n-400)]">Peak:</span>
+                <strong className="text-[var(--color-status-ok)] font-semibold">1,600 bags/hr (11:00)</strong>
+              </span>
             </div>
           </PanelBody>
         </Panel>

@@ -174,12 +174,26 @@
   font-family: var(--font-mono);
   font-size: 11px;
   color: var(--color-n-600);
-  padding: 4px 0;
+  padding: 8px 0 4px 0;
+  display: flex !important;
+  flex-wrap: wrap !important;
+  justify-content: center !important;
+  gap: 12px !important;
+  border-bottom: 1px solid var(--color-n-200);
+  margin-bottom: 8px;
+}
+
+.uplot .u-legend .u-series {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 4px !important;
+  padding: 0 !important;
 }
 
 .uplot .u-legend .u-series th,
 .uplot .u-legend .u-series td {
-  padding: 2px 8px;
+  padding: 0 4px;
+  line-height: 1.2;
 }
 
 .uplot .u-cursor-x,

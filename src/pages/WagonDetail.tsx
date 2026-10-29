@@ -66,6 +66,9 @@ export default function WagonDetail() {
   const chartOptions = useMemo(() => {
     return {
       title: '',
+      legend: {
+        show: false,
+      },
       scales: {
         x: { time: true },
         y: { auto: true, range: [0, 550] as [number, number] },
@@ -245,19 +248,23 @@ export default function WagonDetail() {
               title="Cumulative Loading Progress vs Manifest Target"
               icon={<TrendingUp size={16} />}
               actions={
-                <div className="flex items-center gap-2 text-[10px] font-mono text-[var(--color-n-400)]">
-                  <span className="flex items-center gap-1">
-                    <span className="w-2.5 h-0.5 bg-[#38bdf8]" /> Counted Progress
+                <div className="flex items-center gap-3 text-[11px] font-mono text-[var(--color-n-400)]">
+                  <span className="flex items-center gap-1.5">
+                    <span className="w-2.5 h-1 rounded-full bg-[#38bdf8]" />
+                    <span className="text-[var(--color-n-600)]">Counted Progress</span>
                   </span>
-                  <span className="flex items-center gap-1">
-                    <span className="w-2.5 h-0.5 border-t border-dashed border-[#5A6B8A]" /> Manifest 500
+                  <span className="flex items-center gap-1.5">
+                    <span className="w-3 h-0.5 border-t border-dashed border-[#5A6B8A]" />
+                    <span className="text-[var(--color-n-400)]">Manifest (500)</span>
                   </span>
                 </div>
               }
             />
-            <PanelBody className="p-4">
-              <UPlotChart options={chartOptions} data={chartData} height={250} />
-              <div className="mt-4 pt-3 border-t border-[var(--color-n-200)] grid grid-cols-3 gap-4 text-xs font-mono">
+            <PanelBody className="p-4 flex flex-col justify-between">
+              <div className="w-full">
+                <UPlotChart options={chartOptions} data={chartData} height={240} />
+              </div>
+              <div className="mt-3 pt-2.5 border-t border-[var(--color-n-200)] grid grid-cols-3 gap-4 text-xs font-mono">
                 <div>
                   <div className="text-[10px] text-[var(--color-n-400)] uppercase">Completion</div>
                   <div className="text-base font-semibold text-[var(--color-status-ok)] mt-0.5">
