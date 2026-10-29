@@ -1,0 +1,81 @@
+# Dependencies
+node_modules/
+.pnp
+.pnp.js
+
+# Testing and caches
+coverage/
+.pytest_cache/
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Production build outputs
+dist/
+build/
+
+# Virtual environments
+.venv/
+venv/
+ENV/
+env/
+
+# Python packaging & distribution
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Database and logs
+*.db
+*.sqlite
+*.sqlite3
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Model weights (large binaries - weights downloaded via scripts)
+*.pt
+*.pth
+*.onnx
+*.bin
+wagoneye/weights/
+wagoneye/yolov8n.pt
+wagoneye/yolov8s.pt
+
+# Video & label data
+wagoneye/data/raw/*
+!wagoneye/data/raw/.gitkeep
+wagoneye/data/labels/*
+!wagoneye/data/labels/.gitkeep
+wagoneye/data/thumbnails/*
+!wagoneye/data/thumbnails/.gitkeep
+wagoneye/data/clips/*
+!wagoneye/data/clips/.gitkeep
+wagoneye/data/mock_snapshot.json
+wagoneye/wagoneye.db
+
+# OS / Editor files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Local agent harness files
+/.agent/
+/.agents/
+/.gemini/
+/.gsd/
+/adapters/
+/scripts/
+/GSD-STYLE.md
+/PROJECT_RULES.md
+/VERSION
+/model_capabilities.yaml
