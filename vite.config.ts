@@ -16,4 +16,15 @@ export default defineConfig({
   css: {
     postcss: {},
   },
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          'vendor-react': ['react', 'react-dom', 'react-router-dom'],
+          'vendor-uplot': ['uplot'],
+          'vendor-tanstack': ['@tanstack/react-table', '@tanstack/react-virtual'],
+        },
+      },
+    },
+  },
 })
