@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@import "uplot/dist/uPlot.min.css";
 
 /* ── IBM Plex Sans ─────────────────────────────────────── */
 @font-face {
@@ -145,4 +146,26 @@
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
+}
+
+/* ── uPlot dark theme custom styling ────────────────────── */
+.uplot {
+  font-family: var(--font-mono);
+}
+.uplot .u-legend {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--color-n-600);
+  padding: 4px 0;
+}
+.uplot .u-legend .u-series th,
+.uplot .u-legend .u-series td {
+  padding: 2px 8px;
+}
+.uplot .u-cursor-x,
+.uplot .u-cursor-y {
+  border-color: var(--color-n-300);
+}
+.uplot .u-cursor-pt {
+  border-radius: 50%;
 }
