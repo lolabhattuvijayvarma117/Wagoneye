@@ -28,3 +28,10 @@ doors:
       p2: [1200, 500]
       side_vector: [0.0, 1.0]
       line_tolerance: 20.0
+
+  TRN-REAL-WGN:
+    - door_id: "DOOR-TRN-REAL-A"
+      p1: [750, 100]
+      p2: [750, 950]
+      side_vector: [1.0, 0.0] # moving left (truck/platform) to right (train carriage interior)
+      line_tolerance: 50.0

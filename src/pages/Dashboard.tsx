@@ -345,67 +345,57 @@ export default function Dashboard() {
           />
           <PanelBody className="p-3 flex-1 flex flex-col">
             <div className="relative aspect-video w-full rounded bg-[var(--color-n-0)] border border-[var(--color-n-200)] overflow-hidden flex items-center justify-center group">
-              {/* Simulated Industrial Camera View Background */}
-              <div className="absolute inset-0 bg-gradient-to-b from-[#0a111a] via-[#05080c] to-[#040608] opacity-90" />
-
-              {/* Grid telemetry overlay */}
-              <div
-                className="absolute inset-0 opacity-20"
-                style={{
-                  backgroundImage:
-                    'linear-gradient(to right, #29334A 1px, transparent 1px), linear-gradient(to bottom, #29334A 1px, transparent 1px)',
-                  backgroundSize: '40px 40px',
-                }}
-              />
+              {/* Real Video Footage with live CV detections */}
+              {activeCam === 'CAM-01' ? (
+                <video
+                  src="/videos/annotated_loading.mp4"
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  className="w-full h-full object-cover"
+                />
+              ) : (
+                <>
+                  {/* Standby Camera View */}
+                  <div className="absolute inset-0 bg-gradient-to-b from-[#0a111a] via-[#05080c] to-[#040608] opacity-90" />
+                  <div
+                    className="absolute inset-0 opacity-20"
+                    style={{
+                      backgroundImage:
+                        'linear-gradient(to right, #29334A 1px, transparent 1px), linear-gradient(to bottom, #29334A 1px, transparent 1px)',
+                      backgroundSize: '40px 40px',
+                    }}
+                  />
+                  <div className="text-center z-10 space-y-1">
+                    <span className="text-xs font-mono text-[var(--color-n-400)] block">
+                      CAM-02 • YARD DOOR B
+                    </span>
+                    <span className="text-[10px] font-mono text-[var(--color-status-ok)] block">
+                      FEED STANDBY • WAITING FOR RAKE DOCKING
+                    </span>
+                  </div>
+                </>
+              )}
 
               {/* Telemetry OSD Header */}
-              <div className="absolute top-2 left-3 right-3 flex items-center justify-between text-[10px] font-mono text-[var(--color-n-400)] z-10 pointer-events-none">
+              <div className="absolute top-2 left-3 right-3 flex items-center justify-between text-[10px] font-mono text-[var(--color-n-300)] z-10 pointer-events-none drop-shadow">
                 <div className="flex items-center gap-2">
-                  <span className="text-[var(--color-status-live)] font-bold">● REC</span>
+                  <span className="text-[var(--color-status-live)] font-bold">● LIVE CV</span>
                   <span>{activeCam}</span>
                   <span>[BAY 1 • DOOR A]</span>
                 </div>
                 <div className="flex items-center gap-3">
                   <span>RES: 1920x1080</span>
                   <span>CODEC: H.264</span>
-                  <span className="text-[var(--color-n-600)]">BITRATE: 4.2 Mbps</span>
-                </div>
-              </div>
-
-              {/* Simulated Door Crossing Boundary Line */}
-              <div className="absolute inset-x-8 top-1/2 -translate-y-1/2 flex items-center">
-                <div className="w-full border-t-2 border-dashed border-[var(--color-status-live)] opacity-70 relative">
-                  <span className="absolute -top-4 left-4 bg-[var(--color-n-50)]/90 px-1.5 py-0.5 rounded text-[9px] font-mono text-[var(--color-status-live)] border border-[var(--color-status-live)]/40">
-                    DETECTION GATE: DOOR_A_LINE_Y: 540
-                  </span>
-                </div>
-              </div>
-
-              {/* Simulated Detection Track Bounding Boxes */}
-              <div className="absolute left-1/3 top-1/3 w-28 h-20 border border-[var(--color-accent)] bg-[var(--color-accent)]/10 rounded-sm flex flex-col justify-between p-1 pointer-events-none animate-pulse">
-                <div className="flex items-center justify-between text-[9px] font-mono text-[var(--color-accent)] leading-none">
-                  <span>BAG #1042</span>
-                  <span className="tabular-nums">0.98</span>
-                </div>
-                <div className="text-[8px] font-mono text-[var(--color-status-ok)] leading-none">
-                  FLOW: LOAD →
-                </div>
-              </div>
-
-              <div className="absolute right-1/4 top-2/5 w-28 h-20 border border-[var(--color-status-ok)] bg-[var(--color-status-ok)]/10 rounded-sm flex flex-col justify-between p-1 pointer-events-none">
-                <div className="flex items-center justify-between text-[9px] font-mono text-[var(--color-status-ok)] leading-none">
-                  <span>BAG #1043</span>
-                  <span className="tabular-nums">0.96</span>
-                </div>
-                <div className="text-[8px] font-mono text-[var(--color-status-ok)] leading-none">
-                  VERIFIED
+                  <span className="text-[var(--color-n-200)]">BITRATE: 4.8 Mbps</span>
                 </div>
               </div>
 
               {/* Telemetry OSD Footer */}
-              <div className="absolute bottom-2 left-3 right-3 flex items-center justify-between text-[10px] font-mono text-[var(--color-n-500)] z-10 pointer-events-none">
-                <span>TARGET: WGN-8492</span>
-                <span>TOTAL DOOR PASSES: 450</span>
+              <div className="absolute bottom-2 left-3 right-3 flex items-center justify-between text-[10px] font-mono text-white/90 z-10 pointer-events-none drop-shadow">
+                <span>TARGET: TRN-REAL-WGN</span>
+                <span>MODEL: YOLOv8s + ByteTrack</span>
               </div>
             </div>
 

@@ -70,13 +70,27 @@ class YOLODetector(BaseDetector):
         )
 
         detections = []
+        target_classes = [c.lower() for c in self.classes]
         for r in results:
             boxes = r.boxes
             for b in boxes:
                 cls_id = int(b.cls[0].item())
-                name = self.model.names.get(cls_id, "bag") if hasattr(self.model, "names") else "bag"
+                raw_name = self.model.names.get(cls_id, "bag") if hasattr(self.model, "names") else "bag"
                 conf = float(b.conf[0].item())
                 x1, y1, x2, y2 = b.xyxy[0].tolist()
+
+                # Map standard COCO cargo/bag-carrying objects to 'bag'
+                name = raw_name
+                if raw_name.lower() in ["backpack", "handbag", "suitcase", "banana"]:
+                    name = "bag"
+                # If laborers are carrying bags on their shoulders, detect person with bag flow
+                elif raw_name.lower() == "person" and "person" in target_classes:
+                    name = "bag"
+
+                # Filter if target classes specified
+                if target_classes and name.lower() not in target_classes:
+                    continue
+
                 detections.append(
                     Detection(
                         frame_idx=frame_idx,

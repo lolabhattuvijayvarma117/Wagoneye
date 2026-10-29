@@ -7,9 +7,10 @@ detection:
   device: "cpu" # "cpu", "cuda", or "mps"
   confidence_threshold: 0.35
   iou_threshold: 0.45
-  frame_stride: 3
+  frame_stride: 2
   classes:
     - "bag"
+    - "person"
 
   zero_shot:
     model_name: "google/owlvit-base-patch32"
