@@ -1,0 +1,30 @@
+# Virtual Door Lines for Wagon Counting
+# Side vector points from the platform side into the wagon interior side.
+# Crossing in direction of side_vector = "loaded", opposite = "unloaded".
+
+doors:
+  WGN-4471:
+    - door_id: "DOOR-WGN-4471-A"
+      p1: [450, 600]
+      p2: [850, 600]
+      side_vector: [0.0, 1.0] # [dx, dy] pointing from platform (top) into wagon interior (bottom)
+      line_tolerance: 15.0
+    - door_id: "DOOR-WGN-4471-B"
+      p1: [1100, 600]
+      p2: [1500, 600]
+      side_vector: [0.0, 1.0]
+      line_tolerance: 15.0
+
+  WGN-1102:
+    - door_id: "DOOR-WGN-1102-A"
+      p1: [500, 620]
+      p2: [900, 620]
+      side_vector: [0.0, 1.0]
+      line_tolerance: 15.0
+
+  DEFAULT:
+    - door_id: "DOOR-DEFAULT-01"
+      p1: [400, 500]
+      p2: [1200, 500]
+      side_vector: [0.0, 1.0]
+      line_tolerance: 20.0

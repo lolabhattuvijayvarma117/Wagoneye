@@ -1,0 +1,16 @@
+# Camera and Ingestion Configuration for Port Wagon Eye
+camera_id: "CAM-PORT-DOCK-04"
+location: "Berth 3 Train Siding East"
+source: "data/raw/dock_cam_04.mp4"
+fps: 25.0
+resolution:
+  width: 1920
+  height: 1080
+timezone:
+  utc_offset: "+05:30"
+  tz_name: "Asia/Kolkata"
+
+ingest:
+  clip_output_dir: "data/clips"
+  thumbnail_output_dir: "data/thumbnails"
+  time_format: "ISO8601"

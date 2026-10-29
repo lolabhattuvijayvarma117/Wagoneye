@@ -1,0 +1,38 @@
+# Detection, Tracking, and Counting Model Configuration
+
+detection:
+  mode: "yolo" # "yolo" or "zero_shot"
+  model_type: "yolov8s"
+  weights_path: "weights/yolov8s.pt"
+  device: "cpu" # "cpu", "cuda", or "mps"
+  confidence_threshold: 0.35
+  iou_threshold: 0.45
+  frame_stride: 3
+  classes:
+    - "bag"
+
+  zero_shot:
+    model_name: "google/owlvit-base-patch32"
+    text_queries:
+      - "bag"
+      - "sack"
+      - "package"
+    score_threshold: 0.25
+
+tracking:
+  tracker_type: "bytetrack"
+  track_high_thresh: 0.5
+  track_low_thresh: 0.1
+  new_track_thresh: 0.6
+  track_buffer: 30 # buffer frames to keep tracks alive through short occlusions
+  match_thresh: 0.8
+  frame_rate: 25
+
+counting:
+  crossing_confidence_window: 5 # frames around crossing point to average confidence
+  default_line_tolerance: 15.0 # pixels tolerance around door line
+
+review:
+  low_confidence_threshold: 0.60
+  flag_lost_reacquired: true
+  density_disagreement_ratio: 0.15 # disagreement threshold vs secondary density count
