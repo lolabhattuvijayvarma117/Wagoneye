@@ -1,14 +1,6 @@
 import { useParams, useNavigate } from 'react-router-dom';
 import { ArrowLeft, Clock, Calendar, Package } from 'lucide-react';
-import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 
-const data = [
-  { time: '10:00', bags: 0 },
-  { time: '10:15', bags: 120 },
-  { time: '10:30', bags: 250 },
-  { time: '10:45', bags: 380 },
-  { time: '11:00', bags: 450 },
-];
 
 const events = [
   { id: 1, type: 'Load', time: '11:02:45', score: 0.99, image: null },
@@ -62,24 +54,8 @@ export default function WagonDetail() {
 
           <div className="bg-white dark:bg-slate-800 p-6 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm">
             <h2 className="text-lg font-semibold text-slate-900 dark:text-white mb-6">Cumulative Load Progress</h2>
-            <div className="h-64">
-              <ResponsiveContainer width="100%" height="100%">
-                <AreaChart data={data}>
-                  <defs>
-                    <linearGradient id="colorBags" x1="0" y1="0" x2="0" y2="1">
-                      <stop offset="5%" stopColor="#0ea5e9" stopOpacity={0.3}/>
-                      <stop offset="95%" stopColor="#0ea5e9" stopOpacity={0}/>
-                    </linearGradient>
-                  </defs>
-                  <XAxis dataKey="time" stroke="#64748b" fontSize={12} tickLine={false} axisLine={false} />
-                  <YAxis stroke="#64748b" fontSize={12} tickLine={false} axisLine={false} />
-                  <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#334155" opacity={0.2} />
-                  <Tooltip 
-                    contentStyle={{ backgroundColor: '#1e293b', borderColor: '#334155', color: '#f8fafc', borderRadius: '8px' }}
-                  />
-                  <Area type="monotone" dataKey="bags" stroke="#0ea5e9" strokeWidth={2} fillOpacity={1} fill="url(#colorBags)" />
-                </AreaChart>
-              </ResponsiveContainer>
+            <div className="h-64 flex items-center justify-center bg-slate-50 dark:bg-slate-900/50 rounded-lg text-sm text-slate-400">
+              Cumulative Load Progress (migrating to uPlot)
             </div>
           </div>
         </div>

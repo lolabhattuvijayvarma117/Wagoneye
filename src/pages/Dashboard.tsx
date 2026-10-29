@@ -1,15 +1,5 @@
 import { ArrowUpRight, ArrowDownRight, Package, Truck, Activity } from 'lucide-react';
-import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 
-const data = [
-  { name: 'Mon', loaded: 4000, unloaded: 2400 },
-  { name: 'Tue', loaded: 3000, unloaded: 1398 },
-  { name: 'Wed', loaded: 2000, unloaded: 9800 },
-  { name: 'Thu', loaded: 2780, unloaded: 3908 },
-  { name: 'Fri', loaded: 1890, unloaded: 4800 },
-  { name: 'Sat', loaded: 2390, unloaded: 3800 },
-  { name: 'Sun', loaded: 3490, unloaded: 4300 },
-];
 
 const stats = [
   { name: 'Bags Loaded Today', value: '12,403', change: '+14%', trend: 'up', icon: Package, color: 'text-brand-500' },
@@ -74,30 +64,8 @@ export default function Dashboard() {
           <div className="flex items-center justify-between mb-6">
             <h2 className="text-lg font-semibold text-slate-900 dark:text-white">Activity (Last 7 Days)</h2>
           </div>
-          <div className="h-72 w-full">
-            <ResponsiveContainer width="100%" height="100%">
-              <AreaChart data={data} margin={{ top: 10, right: 10, left: 0, bottom: 0 }}>
-                <defs>
-                  <linearGradient id="colorLoaded" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="5%" stopColor="#0ea5e9" stopOpacity={0.3}/>
-                    <stop offset="95%" stopColor="#0ea5e9" stopOpacity={0}/>
-                  </linearGradient>
-                  <linearGradient id="colorUnloaded" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="5%" stopColor="#f59e0b" stopOpacity={0.3}/>
-                    <stop offset="95%" stopColor="#f59e0b" stopOpacity={0}/>
-                  </linearGradient>
-                </defs>
-                <XAxis dataKey="name" stroke="#64748b" fontSize={12} tickLine={false} axisLine={false} />
-                <YAxis stroke="#64748b" fontSize={12} tickLine={false} axisLine={false} tickFormatter={(value) => `${value / 1000}k`} />
-                <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#334155" opacity={0.2} />
-                <Tooltip 
-                  contentStyle={{ backgroundColor: '#1e293b', borderColor: '#334155', color: '#f8fafc', borderRadius: '8px' }}
-                  itemStyle={{ color: '#e2e8f0' }}
-                />
-                <Area type="monotone" dataKey="loaded" stroke="#0ea5e9" strokeWidth={2} fillOpacity={1} fill="url(#colorLoaded)" name="Loaded" />
-                <Area type="monotone" dataKey="unloaded" stroke="#f59e0b" strokeWidth={2} fillOpacity={1} fill="url(#colorUnloaded)" name="Unloaded" />
-              </AreaChart>
-            </ResponsiveContainer>
+          <div className="h-72 w-full flex items-center justify-center bg-slate-50 dark:bg-slate-900/50 rounded-lg text-sm text-slate-400">
+            Activity Chart (migrating to uPlot)
           </div>
         </div>
 
