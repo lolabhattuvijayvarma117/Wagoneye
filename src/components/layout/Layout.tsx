@@ -3,7 +3,7 @@ import Sidebar from './Sidebar';
 import Topbar from './Topbar';
 import { useState } from 'react';
 
-export default function Layout() {
+export function Layout() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   return (
@@ -32,3 +32,5 @@ export default function Layout() {
     </div>
   );
 }
+
+export default Layout;
