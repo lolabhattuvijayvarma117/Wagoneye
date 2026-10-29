@@ -1,0 +1,6 @@
+wagon_id,train_id,date,manifest_bag_count,direction
+WGN-4471,TR-2210,2026-10-25,280,loaded
+WGN-1102,TR-2210,2026-10-25,310,loaded
+WGN-7782,TR-1022,2026-10-26,195,unloaded
+WGN-3391,TR-1022,2026-10-26,240,unloaded
+WGN-8840,TR-3301,2026-10-27,150,loaded
