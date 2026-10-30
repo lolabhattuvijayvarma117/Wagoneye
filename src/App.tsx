@@ -1,8 +1,12 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import { ToastProvider } from './components/ui/Toast'
+import Corporate from './pages/Corporate'
 import Login from './pages/Login'
 import Dashboard from './pages/Dashboard'
+import Wagons from './pages/Wagons'
 import WagonDetail from './pages/WagonDetail'
+import Rakes from './pages/Rakes'
+import Cameras from './pages/Cameras'
 import Reports from './pages/Reports'
 import AskAI from './pages/AskAI'
 import Settings from './pages/Settings'
@@ -19,20 +23,36 @@ export default function App() {
     <ToastProvider>
       <BrowserRouter>
         <Routes>
+          {/* Public Corporate & Operations Portal */}
+          <Route path="/" element={<Corporate />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/" element={<Layout />}>
-            <Route index element={<Navigate to="/dashboard" replace />} />
-            <Route path="dashboard" element={<Dashboard />} />
-            <Route path="wagons" element={<Navigate to="/wagons/WGN-8492" replace />} />
-            <Route path="wagons/:id" element={<WagonDetail />} />
-            <Route path="rakes" element={<Navigate to="/dashboard" replace />} />
-            <Route path="cameras" element={<Navigate to="/dashboard" replace />} />
-            <Route path="reports" element={<Reports />} />
-            <Route path="ask-ai" element={<AskAI />} />
-            <Route path="settings" element={<Settings />} />
+
+          {/* Authenticated Control Room Operations Shell */}
+          <Route path="/dashboard" element={<Layout />}>
+            <Route index element={<Dashboard />} />
           </Route>
-          {/* Catch-all */}
-          <Route path="*" element={<Navigate to="/dashboard" replace />} />
+          <Route path="/wagons" element={<Layout />}>
+            <Route index element={<Wagons />} />
+            <Route path=":id" element={<WagonDetail />} />
+          </Route>
+          <Route path="/rakes" element={<Layout />}>
+            <Route index element={<Rakes />} />
+          </Route>
+          <Route path="/cameras" element={<Layout />}>
+            <Route index element={<Cameras />} />
+          </Route>
+          <Route path="/reports" element={<Layout />}>
+            <Route index element={<Reports />} />
+          </Route>
+          <Route path="/ask-ai" element={<Layout />}>
+            <Route index element={<AskAI />} />
+          </Route>
+          <Route path="/settings" element={<Layout />}>
+            <Route index element={<Settings />} />
+          </Route>
+
+          {/* Catch-all redirect to corporate portal */}
+          <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </BrowserRouter>
     </ToastProvider>

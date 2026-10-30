@@ -73,6 +73,11 @@
   --color-status-idle: #5A6B8A;
   --color-status-live: oklch(70% 0.22 145);
 
+  --color-loaded: #10B981;
+  --color-unloaded: #38BDF8;
+  --color-warning: #F59E0B;
+  --color-danger: #EF4444;
+
   /* Chart series */
   --color-series-loaded: oklch(72% 0.16 220);
   --color-series-unloaded: oklch(72% 0.17 50);
@@ -118,8 +123,10 @@
 }
 
 /* Tabular nums on mono — class-based and inline-styled */
+.num,
 .font-mono,
 [class*="font-mono"] {
+  font-family: var(--font-mono);
   font-variant-numeric: tabular-nums;
 }
 

@@ -48,7 +48,7 @@ export default function Topbar({ onMenuToggle, onAlertsClick, unreadAlertCount =
         )}
 
         {/* Wordmark */}
-        <div className="flex items-center gap-2 select-none">
+        <a href="/" className="flex items-center gap-2 select-none hover:opacity-90 transition-opacity">
           <span className="p-1 rounded bg-[var(--color-n-150)] text-[var(--color-accent)] border border-[var(--color-n-200)]">
             <TrainFront size={16} />
           </span>
@@ -58,7 +58,7 @@ export default function Topbar({ onMenuToggle, onAlertsClick, unreadAlertCount =
           >
             WAGONEYE
           </span>
-        </div>
+        </a>
 
         <div className="h-4 w-px bg-[var(--color-n-200)] hidden sm:block" />
 
